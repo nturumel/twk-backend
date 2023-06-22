@@ -89,7 +89,7 @@ def handle_chat_with_agent():
         response = chat_agent.chat(query)
         logging.info(f"response: {response}")
 
-        return jsonify({"response": response}), 200
+        return jsonify(response), 200
     except Exception as e:
         logging.error(f"Error: {e}")
         return jsonify({"sessionId": session_id, "error": e}), 500

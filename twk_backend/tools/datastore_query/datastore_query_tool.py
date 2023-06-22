@@ -15,11 +15,11 @@ def get_datastore_query_tool(
     tool = Tool(
         name=datastore_name,
         description=f"""
-        QA - useful for when you need to ask questions about: {datastore_name}.
+        Useful for answering questions about: {datastore_name}.
         {datastore_description}.
-        Input must be a fully formed question
+        Input must be a fully formed question.
         """,
-        func=datastore_query.search,
+        func=datastore_query.chat,
     )
     tool.return_direct = True
 
@@ -40,14 +40,14 @@ class DatastoreQuery:
 
     def process_results(self, results):
         result_data = results.get("result", [])
-        return str([
+        return [
             {
                 "score": each.get("score"),
                 "source": each.get("payload", {}).get("source"),
                 "text": each.get("payload", {}).get("text"),
             }
             for each in result_data
-        ])
+        ]
 
     def search(self, query: str):
         vectors = self.embeddings.embed_documents([query])
@@ -85,6 +85,6 @@ class DatastoreQuery:
 
         chain = LLMChain(llm=self.model, prompt=prompt_template)
 
-        output = chain.run()
+        output = chain.run({})
 
         return output.strip()

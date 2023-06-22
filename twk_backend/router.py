@@ -11,7 +11,9 @@ from twk_backend.tools.utils import get_tool
 app = Flask(__name__)
 
 # Create a TTLCache object with a maximum size and a time to live (in seconds)
-chat_agent_cache: cachetools.TTLCache[str, CustomChatAgent] = cachetools.TTLCache(ttl=5 * 60, maxsize=5000)
+chat_agent_cache: cachetools.TTLCache[str, CustomChatAgent] = cachetools.TTLCache(
+    ttl=5 * 60, maxsize=5000
+)
 
 
 @app.route("/initialiseAgent", methods=["POST"])
@@ -93,7 +95,3 @@ def handle_chat_with_agent():
     except Exception as e:
         logging.error(f"Error: {e}")
         return jsonify({"sessionId": session_id, "error": e}), 500
-
-
-if __name__ == "__main__":
-    app.run(port=5000)  # run the Flask app on port 5000

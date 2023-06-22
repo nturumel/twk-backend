@@ -24,3 +24,7 @@ def checkformat():
 
 def docs():
     subprocess.run(["sphinx-build", "docs/source", "docs/build"])
+
+
+def launch():
+    subprocess.run(["python", "twk_backend/router.py"])

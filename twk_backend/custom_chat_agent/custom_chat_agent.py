@@ -5,17 +5,12 @@ from langchain.agents import AgentExecutor, LLMSingleActionAgent, Tool
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationEntityMemory
 
-from twk_backend.custom_chat_agent.custom_output_parser import \
-    CustomOutputParser
+from twk_backend.custom_chat_agent.custom_output_parser import CustomOutputParser
 from twk_backend.custom_chat_agent.custom_prompt import CustomPromptTemplate
-from twk_backend.custom_chat_agent.example_refine_chain import \
-    ExampleRefineChain
+from twk_backend.custom_chat_agent.example_refine_chain import ExampleRefineChain
 
 
 class CustomChatAgent:
-    agent_executor: AgentExecutor
-    refine_chain: ExampleRefineChain
-
     def __init__(
         self,
         tools: List[Tool],
@@ -35,7 +30,7 @@ class CustomChatAgent:
                 "input",
                 "intermediate_steps",
                 "history",
-                "agent_scratchpad",
+                # "agent_scratchpad",
                 "entities",
             ],
         )
@@ -60,6 +55,8 @@ class CustomChatAgent:
 
         if examples:
             self.refine_chain = ExampleRefineChain(examples)
+        else:
+            self.refine_chain = None
 
     def chat(self, user_input: str):
         response = self.agent_executor.run(user_input)

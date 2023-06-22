@@ -13,6 +13,7 @@ cachetools = "^5.3.1"
 python-env-loader = "^0.0.2"
 python-dotenv = "^1.0.0"
 openai = "^0.27.8"
+tiktoken = "^0.4.0"
 
 [build-system]
 requires = ["poetry-core"]

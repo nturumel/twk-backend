@@ -40,17 +40,17 @@ class DatastoreQuery:
 
     def process_results(self, results):
         result_data = results.get("result", [])
-        return [
+        return str([
             {
                 "score": each.get("score"),
                 "source": each.get("payload", {}).get("source"),
                 "text": each.get("payload", {}).get("text"),
             }
             for each in result_data
-        ]
+        ])
 
     def search(self, query: str):
-        vectors = self.embeddings.embedDocuments([query])
+        vectors = self.embeddings.embed_documents([query])
 
         response: requests.Response = requests.post(
             url=f"{self.base_url}/collections/text-embedding-ada-002/points/search",
@@ -87,4 +87,4 @@ class DatastoreQuery:
 
         output = chain.run()
 
-        return {"answer": output.strip()}
+        return output.strip()

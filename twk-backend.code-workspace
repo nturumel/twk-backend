@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.autoComplete.extraPaths": [".venv/Lib/site-packages"],
+    "python.analysis.extraPaths": [".venv/Lib/site-packages"],
+    "python.linting.flake8Args": [
+      "--max-line-length=120",
+      "--ignore=E402,F841,F401,E302,E305"
+    ],
+    "autoDocstring.docstringFormat": "sphinx",
+    "autoDocstring.startOnNewLine": true
+  }
+}

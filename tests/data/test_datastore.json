@@ -1,0 +1,15 @@
+{
+    "id": "clhjkrjfa000rkemc3okp81x6",
+    "name": "48 Laws of pwer",
+    "description": "The book 48 Laws of Power",
+    "type": "qdrant",
+    "visibility": "private",
+    "config": {},
+    "owner_id": "clh5ai6rr0000kewwekyc7e3b",
+    "created_at": "2023-05-11 20:21:20.277",
+    "updated_at": "2023-05-11 20:21:20.277",
+    "plugin_icon_url": "NULL",
+    "plugin_description_for_humans": "NULL",
+    "plugin_description_for_model": "NULL",
+    "plugin_name": "NULL"
+}

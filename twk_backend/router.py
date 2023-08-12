@@ -184,8 +184,19 @@ def handle_refine_response_with_samples():
         logging.info(f"Response: {response}")
 
         # Get agent
-        sample_refine_chain = agent_samples_cache[session_id]
-        logging.info("Obtained chat agent samples")
+        sample_refine_chain = None
+        if session_id in agent_samples_cache:
+            sample_refine_chain = agent_samples_cache[session_id]
+            logging.info("Obtained chat agent samples")
+        else:
+            # Extract components
+            samples = data.get("samples")
+            logging.info("Samples extracted")
+
+            sample_refine_chain = ExampleRefineChain(
+                examples=samples,
+            )
+            agent_samples_cache[session_id] = sample_refine_chain
 
         refined_response = sample_refine_chain.refine_response(input=query, response=response)
         logging.info(f"response: {refined_response}")
@@ -194,3 +205,4 @@ def handle_refine_response_with_samples():
     except Exception as e:
         logging.error(f"Error: {e}")
         return jsonify({"sessionId": session_id, "error": str(e)}), 500
+
